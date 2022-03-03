@@ -46,7 +46,11 @@ public class Users extends BaseEntity{
 	}
 
 
-	public Users(String firstName, String lastName, String email, String mobileNo, String password, Role role) {
+	
+
+
+	public Users(String firstName, String lastName, String email, String mobileNo, String password, Role role,
+			Address address) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -54,7 +58,11 @@ public class Users extends BaseEntity{
 		this.mobileNo = mobileNo;
 		this.password = password;
 		this.role = role;
+		this.address = address;
 	}
+
+
+
 
 
 	public String getFirstName() {

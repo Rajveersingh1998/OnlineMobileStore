@@ -9,8 +9,8 @@ public class LoginRequest {
 	private String email;
 	@Column(length = 20, nullable = false)
 	private String password;
-	@Column(length = 20 , nullable = false)
-	private Role role;
+//	@Column(length = 20 , nullable = false)
+//	private Role role;
 	public LoginRequest() {
 	
 	}
@@ -26,15 +26,15 @@ public class LoginRequest {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Role getRole() {
-		return role;
-	}
-	public void setRole(Role role) {
-		this.role = role;
-	}
+//	public Role getRole() {
+//		return role;
+//	}
+//	public void setRole(Role role) {
+//		this.role = role;
+//	}
 	@Override
 	public String toString() {
-		return "LoginRequest [email=" + email + ", password=" + password + ", role=" + role + "]";
+		return "LoginRequest [email=" + email + ", password=" + password +  "]";
 	}
 	
 	

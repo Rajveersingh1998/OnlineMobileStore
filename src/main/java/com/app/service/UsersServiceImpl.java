@@ -1,14 +1,19 @@
 package com.app.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.dao.AddressRepository;
 import com.app.dao.UserRepository;
+import com.app.dto.DtoEntityConverter;
 import com.app.dto.LoginRequest;
+import com.app.dto.UserDTO;
+import com.app.pojos.Address;
 import com.app.pojos.Role;
 import com.app.pojos.Users;
 
@@ -19,6 +24,10 @@ public class UsersServiceImpl implements IUsersService{
 	//D.I
 	@Autowired
 	private UserRepository userRepo;
+	@Autowired
+	private DtoEntityConverter converter;
+	@Autowired
+	private AddressRepository adrRepo;
 	
 	//BL
 	//Authenticate Admin
@@ -28,13 +37,35 @@ public class UsersServiceImpl implements IUsersService{
 			                 .orElseThrow(() -> new RuntimeException("User ID not found!!!!"));
 	}
 
-	//get all customers
+	//ADMIN--->get all customers
 	@Override
 	public List<Users> getAllCustomers() {
 		
 		return userRepo.findByRole(Role.CUSTOMER);
 	}
+
+	//ADMIN--->delete customer by email id
+	@Override
+	public String deleteCustomer(String emailId) {
+		userRepo.deleteByEmail(emailId);
+		return "Customer deleted Sucessfully";
+	}
+
+	//CUSTOMER----->Registering new user
+	@Override
+	public String saveUser(UserDTO userDto) {
+		
+		Optional<Users> userExist = userRepo.findByEmail(userDto.getEmail());
+		if(userExist.isPresent()) {
+			throw new RuntimeException("Email Already Exist");
+		}
+		Address adr = converter.userAddress(userDto);	
+		adrRepo.save(adr);	
+		
+		Users user= converter.toUserEntity(userDto, adr);
+		userRepo.save(user);	
 	
-	
+		return user.getEmail();
+	}
 	
 }

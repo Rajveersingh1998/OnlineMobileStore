@@ -27,11 +27,12 @@ public class Mobiles extends BaseEntity{
 	private String mobColor;
 	
 	@Lob
-	private byte[] image;
+	@Column(nullable=false)
+	private byte[] mimage;
 	
 	@Column(unique = true, nullable=false)
 	@JsonProperty("imei")
-	private int imei;
+	private String imei;
 	@JsonProperty("mdate")
 	private LocalDate manufDate;
 	@Column(length=20, nullable=false)
@@ -46,7 +47,7 @@ public class Mobiles extends BaseEntity{
 	
 	}
 
-	public Mobiles(String mobModel, String mobName, String mobColor, int imei, LocalDate manufDate, double price) {
+	public Mobiles(String mobModel, String mobName, String mobColor, String imei, LocalDate manufDate, double price) {
 		super();
 		this.mobModel = mobModel;
 		this.mobName = mobName;
@@ -80,11 +81,11 @@ public class Mobiles extends BaseEntity{
 		this.mobColor = mobColor;
 	}
 
-	public int getImei() {
+	public String getImei() {
 		return imei;
 	}
 
-	public void setImei(int imei) {
+	public void setImei(String imei) {
 		this.imei = imei;
 	}
 

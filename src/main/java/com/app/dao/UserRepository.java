@@ -21,4 +21,12 @@ public interface UserRepository extends JpaRepository<Users, Integer> {
 	
 	//get all customers
 	List<Users> findByRole(Role role);
+	
+	//ADMIN--->delete customer by email id
+	 void deleteByEmail(String emailId);
+	
+	 ////CUSTOMER----->Registering new user
+	 Users save(Users user);
+	 
+	 Optional<Users> findByEmail(String emailId);
 }

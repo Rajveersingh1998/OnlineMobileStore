@@ -25,9 +25,7 @@ public class Address extends BaseEntity{
     @JsonProperty("upin")
     private int pincode;
     
-//	  @OneToOne(cascade=CascadeType.ALL,orphanRemoval=true)
-//	  @JoinColumn(name="u_id")
-//	  private Users user;
+
 
 	public Address() {
 		super();
@@ -74,6 +72,11 @@ public class Address extends BaseEntity{
 		this.pincode = pincode;
 	}
 
+	@Override
+	public String toString() {
+		return "Address [ulocality=" + ulocality + ", city=" + city + ", state=" + state + ", pincode=" + pincode + "]";
+	}
+
 //	public Users getUser() {
 //		return user;
 //	}
@@ -82,12 +85,7 @@ public class Address extends BaseEntity{
 //		this.user = user;
 //	}
 //
-//	@Override
-//	public String toString() {
-//		return "Address [ulocality=" + ulocality + ", city=" + city + ", state=" + state + ", pincode=" + pincode
-//				+ ", user=" + user + "]";
-//	}
-	
+
     
     
    

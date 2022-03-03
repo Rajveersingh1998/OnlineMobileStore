@@ -46,6 +46,7 @@ public class Brands extends BaseEntity{
 	
 	@Lob
 	@JsonProperty("bthumb")
+	@Column(nullable = false)
 	private byte[] brandImage;
 
 	@OneToMany(mappedBy="chosenBrand",cascade = CascadeType.ALL,orphanRemoval=true)
@@ -86,7 +87,7 @@ public class Brands extends BaseEntity{
 			m.setChosenBrand(this);
 		}
 
-		public void removeStudent(Mobiles m) {
+		public void removeMobiles(Mobiles m) {
 			
 			mobiles.remove(m);
 			

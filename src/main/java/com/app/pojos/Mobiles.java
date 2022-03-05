@@ -9,6 +9,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
@@ -38,6 +39,9 @@ public class Mobiles extends BaseEntity{
 	@Column(length=20, nullable=false)
 	@JsonProperty("mprice")
 	private double price;
+	
+	@Column(name="tag")
+	private String flag;
 	
 	@ManyToOne
 	@JoinColumn(name = "brand_id",nullable = false)//=> NOT NULL constraint

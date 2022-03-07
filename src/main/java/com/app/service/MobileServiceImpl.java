@@ -25,6 +25,16 @@ public class MobileServiceImpl implements IMobileService{
 		return mobileRepo.findAll();
 	}
 
+
+	@Override
+	public String addMobile(Mobiles newMob) {
+		
+     if(mobileRepo.save(newMob) != null) {
+    	 return "Mobile added sucessfully";
+     }	 
+		return "Cannot add Mobile";
+	}
+
 	
 	
 }

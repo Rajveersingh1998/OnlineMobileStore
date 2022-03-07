@@ -1,5 +1,6 @@
 package com.app.pojos;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -8,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -27,38 +30,46 @@ public class Mobiles extends BaseEntity{
 	@JsonProperty("mcolor")
 	private String mobColor;
 	
-	@Lob
-	@Column(nullable=false)
-	private byte[] mimage;
+	@Column(length = 20 ,nullable=false)
+	private String mobImage;
+//	@Lob
+//	@Column(nullable=false)
+//	private byte[] mimage;
 	
 	@Column(unique = true, nullable=false)
 	@JsonProperty("imei")
 	private String imei;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonProperty("mdate")
 	private LocalDate manufDate;
+	
 	@Column(length=20, nullable=false)
 	@JsonProperty("mprice")
 	private double price;
 	
-	@Column(name="tag")
+	@Column(name="tag", nullable=false)
 	private String flag;
 	
 	@ManyToOne
 	@JoinColumn(name = "brand_id",nullable = false)//=> NOT NULL constraint
 	private Brands chosenBrand;
-	
+
 	public Mobiles() {
-	
+		
 	}
 
-	public Mobiles(String mobModel, String mobName, String mobColor, String imei, LocalDate manufDate, double price) {
+	public Mobiles(String mobModel, String mobName, String mobColor, String mobImage, String imei, LocalDate mdate,
+			double price, String flag) {
 		super();
 		this.mobModel = mobModel;
 		this.mobName = mobName;
 		this.mobColor = mobColor;
+		this.mobImage = mobImage;
 		this.imei = imei;
-		this.manufDate = manufDate;
+		this.manufDate = mdate;
 		this.price = price;
+		this.flag = flag;
 	}
 
 	public String getMobModel() {
@@ -85,6 +96,14 @@ public class Mobiles extends BaseEntity{
 		this.mobColor = mobColor;
 	}
 
+	public String getMobImage() {
+		return mobImage;
+	}
+
+	public void setMobImage(String mobImage) {
+		this.mobImage = mobImage;
+	}
+
 	public String getImei() {
 		return imei;
 	}
@@ -109,7 +128,14 @@ public class Mobiles extends BaseEntity{
 		this.price = price;
 	}
 
-	
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+
 	public Brands getChosenBrand() {
 		return chosenBrand;
 	}
@@ -120,9 +146,12 @@ public class Mobiles extends BaseEntity{
 
 	@Override
 	public String toString() {
-		return "Mobiles [mobModel=" + mobModel + ", mobName=" + mobName + ", mobColor=" + mobColor + ", imei=" + imei
-				+ ", manufDate=" + manufDate + ", price=" + price + "]";
+		return "Mobiles [mobModel=" + mobModel + ", mobName=" + mobName + ", mobColor=" + mobColor + ", mobImage="
+				+ mobImage + ", imei=" + imei + ", manufDate=" + manufDate + ", price=" + price + ", flag=" + flag
+				+ "]";
 	}
+	
+    
 	
 	
 	

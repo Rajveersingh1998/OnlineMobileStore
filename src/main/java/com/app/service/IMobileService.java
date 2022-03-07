@@ -8,4 +8,7 @@ public interface IMobileService {
 
 	//get all mobiles available
 	List<Mobiles> getAvailiableMobiles();
+	
+	//save mobile
+	String addMobile(Mobiles newMob);
 }

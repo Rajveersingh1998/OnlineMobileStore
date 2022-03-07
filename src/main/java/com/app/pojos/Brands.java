@@ -44,19 +44,21 @@ public class Brands extends BaseEntity{
 	@JsonProperty("bname")
 	private String brandName;
 	
-	@Lob
-	@JsonProperty("bthumb")
-	@Column(nullable = false)
-	private byte[] brandImage;
+	@Column(length = 30)
+	private String brandImage;
+//	@Lob
+//	@JsonProperty("bthumb")
+//	@Column(nullable = false)
+//	private byte[] brandImage;
 
 	@OneToMany(mappedBy="chosenBrand",cascade = CascadeType.ALL,orphanRemoval=true)
 	private List<Mobiles> mobiles=new ArrayList<>();
 	
 	public Brands() {
-		super();
+		
 	}
 
-	public Brands(String brandName, byte[] brandImage) {
+	public Brands(String brandName, String brandImage) {
 		super();
 		this.brandName = brandName;
 		this.brandImage = brandImage;
@@ -70,11 +72,11 @@ public class Brands extends BaseEntity{
 		this.brandName = brandName;
 	}
 
-	public byte[] getBrandImage() {
+	public String getBrandImage() {
 		return brandImage;
 	}
 
-	public void setBrandImage(byte[] brandImage) {
+	public void setBrandImage(String brandImage) {
 		this.brandImage = brandImage;
 	}
 	
@@ -94,10 +96,11 @@ public class Brands extends BaseEntity{
 			m.setChosenBrand(null);
 		}
 
-	@Override
-	public String toString() {
-		return "Brands [brandName=" + brandName + ", brandImage=" + Arrays.toString(brandImage) + "]";
-	}
+		@Override
+		public String toString() {
+			return "Brands [brandName=" + brandName + ", brandImage=" + brandImage + "]";
+		}
+
 	
 	
 	

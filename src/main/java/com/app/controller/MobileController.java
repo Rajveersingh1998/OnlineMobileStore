@@ -10,8 +10,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,8 +24,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.app.dto.ResponseDTO;
 import com.app.pojos.Brands;
 import com.app.pojos.Mobiles;
+import com.app.pojos.Specifications;
 import com.app.service.IBrandService;
 import com.app.service.IMobileService;
+import com.app.service.ISpecsService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -31,18 +37,21 @@ public class MobileController {
 	 @Value("${file.upload-dir}")
      private String FILE;
 	 
-	//Dependancy injection
+	//Dependency injection
 	@Autowired
 	private IMobileService mobileService;
 	
 	@Autowired
 	private IBrandService brandService;
 	
+	@Autowired
+	private ISpecsService specsService;
+	
 	@GetMapping
 	public ResponseDTO<?> getAllMobiles(){
 		System.out.println("in getAllMobiles");
 		try {	
-			return  new ResponseDTO<>(HttpStatus.OK, "All Available Mobiles", mobileService.getAvailiableMobiles() );
+			return  new ResponseDTO<>(HttpStatus.OK, "All Available Mobiles", mobileService.getAvailiableMobiles());
 		}catch (RuntimeException e) {
 			System.out.println("err in getAllMobiles : "+e);
 			return new ResponseDTO<>(HttpStatus.INTERNAL_SERVER_ERROR, "mobiles not available", null);
@@ -68,10 +77,41 @@ public class MobileController {
         	  return new ResponseDTO<>(HttpStatus.OK,"Mobile Added sucessfully",mthumb.getOriginalFilename());
         }else {
         	return new ResponseDTO<>(HttpStatus.NOT_FOUND,"Cannot add Mobile",null);
-        }
-       
-        
-        
+        }     
     }
+	
+	@PutMapping("/update/{mobileId}")
+	public ResponseDTO<?> updateMobile(@RequestBody Mobiles mobile, @PathVariable int mobileId){
+		System.out.println("in updateMobile ");
+		try {		
+			mobileService.updateMobilePrice(mobile.getPrice(), mobileId);
+			return new ResponseDTO<>(HttpStatus.OK, "Mobile Price Updated Sucessfully :" , mobile.getPrice());
+		}catch (RuntimeException e) {
+			System.out.println("err in Updating: "+e); 
+			return new ResponseDTO<>(HttpStatus.INTERNAL_SERVER_ERROR, "Cannot update mobile ", null);
+		}
+	}
+	
+	@DeleteMapping("/{mobileId}")
+	public ResponseDTO<?> deleteMobile(@PathVariable int mobileId){
+				  System.out.println("in delete Mobile");
+		try {	
+			Specifications specsExist = specsService.findSpecsOfMobile(mobileId);
+			if(specsExist != null) {
+				 
+				specsService.deleteSpecification(specsExist.getId());
+				mobileService.deleteMobile(mobileId);
+				
+				return new ResponseDTO<>(HttpStatus.OK, "Mobile with "+mobileId +" Deleted Sucessfully", null);
+			}else {
+				return new ResponseDTO<>(HttpStatus.NOT_FOUND, "Specs with :"+mobileId +"not Found", null);
+			}					
+		}catch (RuntimeException e) {
+			System.out.println("err in deleting Mobile : "+e); 
+			return new ResponseDTO<>(HttpStatus.INTERNAL_SERVER_ERROR, "Mobile not deleted ", null);
+		}
+	}
+	
+	
 	
 }

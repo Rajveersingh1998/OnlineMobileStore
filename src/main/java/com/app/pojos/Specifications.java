@@ -2,6 +2,7 @@ package com.app.pojos;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
@@ -48,7 +49,6 @@ public class Specifications extends BaseEntity{
 	
 	@OneToOne
 	@JoinColumn(name="mobile_id",nullable=false)
-	@MapsId
 	private Mobiles mobile;
 	
 	public Specifications() {

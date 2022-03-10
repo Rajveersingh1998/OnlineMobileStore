@@ -41,8 +41,14 @@ public class BrandService implements IBrandService {
 		
 	     return brand.orElseThrow();
 	}
-	
-	
 
-	
+
+	@Override
+	public String updateBrand(int bid, String bthumb) {
+		
+		brandRepo.updateBrand(bthumb, bid);
+		
+		return "Brand Updated Sucessfully";
+	}
+		
 }

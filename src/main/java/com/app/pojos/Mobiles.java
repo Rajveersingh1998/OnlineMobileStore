@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -32,9 +33,6 @@ public class Mobiles extends BaseEntity{
 	
 	@Column(length = 20 ,nullable=false)
 	private String mobImage;
-//	@Lob
-//	@Column(nullable=false)
-//	private byte[] mimage;
 	
 	@Column(unique = true, nullable=false)
 	@JsonProperty("imei")
@@ -52,7 +50,7 @@ public class Mobiles extends BaseEntity{
 	private String flag;
 	
 	@ManyToOne
-	@JoinColumn(name = "brand_id",nullable = false)//=> NOT NULL constraint
+	@JoinColumn(name = "brand_id",nullable = false )//=> NOT NULL constraint
 	private Brands chosenBrand;
 
 	public Mobiles() {

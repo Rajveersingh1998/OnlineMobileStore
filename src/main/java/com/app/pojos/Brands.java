@@ -46,10 +46,6 @@ public class Brands extends BaseEntity{
 	
 	@Column(length = 30)
 	private String brandImage;
-//	@Lob
-//	@JsonProperty("bthumb")
-//	@Column(nullable = false)
-//	private byte[] brandImage;
 
 	@OneToMany(mappedBy="chosenBrand",cascade = CascadeType.ALL,orphanRemoval=true)
 	private List<Mobiles> mobiles=new ArrayList<>();
@@ -59,7 +55,7 @@ public class Brands extends BaseEntity{
 	}
 
 	public Brands(String brandName, String brandImage) {
-		super();
+		
 		this.brandName = brandName;
 		this.brandImage = brandImage;
 	}

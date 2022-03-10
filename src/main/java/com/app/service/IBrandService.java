@@ -12,5 +12,7 @@ public interface IBrandService {
 	List<Brands> getAllBrands();
 	
 	Brands findBrandBYId(int brandid);
+	
+	String updateBrand(int bid , String bthumb);
 }
                                                                                             

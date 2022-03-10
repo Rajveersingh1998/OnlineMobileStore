@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,7 +36,7 @@ public class BrandController {
 
 	    @PostMapping("/addbrand")
 	    public ResponseEntity<Object> imageUpload(@RequestParam MultipartFile brandImg ,@RequestParam String bname) throws IOException{
-            System.out.println("Agaya bhailog");
+            System.out.println("in Brand imageUpload");
 	        File imageFile = new File(FILE+brandImg.getOriginalFilename());
 	        imageFile.createNewFile();
 	        FileOutputStream fos = new FileOutputStream(imageFile);
@@ -63,9 +64,32 @@ public class BrandController {
 			}
 	    }
 	    
+	    @PutMapping("/update")
+	    public ResponseDTO<?> updateBrand(@RequestParam int bid , @RequestParam MultipartFile bthumb){
+	    	
+	    	System.out.println("in updateBrand");
+			try {				   
+				Brands brandExist = brandService.findBrandBYId(bid);
+				
+				if(brandExist != null) {
+					File imageFile = new File(FILE+bthumb.getOriginalFilename());
+			        imageFile.createNewFile();
+			        FileOutputStream fos = new FileOutputStream(imageFile);
+			        fos.write(bthumb.getBytes());
+			
+			        
+			        brandService.updateBrand(bid, bthumb.getOriginalFilename());
+			        fos.close();
+					 
+				     return  new ResponseDTO<>(HttpStatus.OK, "Updated Brand ", null);		
+				}else {
+					return  new ResponseDTO<>(HttpStatus.NOT_FOUND, "Brand Not Available", null);		
+				}
+			}catch (Exception e) {
+				   System.out.println("err in updateBrand : "+e);
+				return new ResponseDTO<>(HttpStatus.INTERNAL_SERVER_ERROR, "ERROR", null);
+			}	    		    	
+	    }
 	    
-	    
-	    
-	    
-	    
+	     
 }

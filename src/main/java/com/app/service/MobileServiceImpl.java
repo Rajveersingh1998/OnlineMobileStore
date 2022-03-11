@@ -1,16 +1,15 @@
 package com.app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.app.dao.MobileRepository;
-import com.app.pojos.Brands;
 import com.app.pojos.Mobiles;
 
 @Service
@@ -70,6 +69,28 @@ public class MobileServiceImpl implements IMobileService{
 		}
 		return "Mobile Not Found";
 	}
+
+
+	@Override
+	public List<Mobiles> getAllBestSellingMobiles() {
+			String bs = "bestSell";
+		return mobileRepo.getAllMobilesByFlag(bs);
+	}
+
+
+//	@Override
+//	public List<MobileDTO> getAllUpcomingMobiles() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+
+//	@Override
+//	public List<MobileDTO> getAllTrendingMobiles() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+	
 	
 	
 	

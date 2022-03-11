@@ -112,6 +112,15 @@ public class MobileController {
 		}
 	}
 	
-	
+	@GetMapping("/bestsale")
+	public ResponseDTO<?> getBestSellingMobiles(){
+		System.out.println("in geting bs Mobiles ");
+		try {		
+			return new ResponseDTO<>(HttpStatus.OK, "All best selling mobiles" , mobileService.getAllBestSellingMobiles());
+		}catch (RuntimeException e) {
+			System.out.println("err in geting bs Mobiles: "+e); 
+			return new ResponseDTO<>(HttpStatus.INTERNAL_SERVER_ERROR, "ERROR while Getting BestSelling Mobiles ", null);
+		}
+	}
 	
 }

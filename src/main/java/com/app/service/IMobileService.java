@@ -2,6 +2,7 @@ package com.app.service;
 
 import java.util.List;
 
+import com.app.dto.MobileDTO;
 import com.app.pojos.Mobiles;
 
 public interface IMobileService {
@@ -20,4 +21,13 @@ public interface IMobileService {
 	
 	//delete Mobile by id
 	String deleteMobile(int mobileId);
+	
+	//get all Best selling Mobiles
+	List<Mobiles> getAllBestSellingMobiles();
+	
+	//get all Upcoming Mobiles
+	//List<MobileDTO> getAllUpcomingMobiles();
+	
+	//get all trending Mobiles
+	//List<MobileDTO> getAllTrendingMobiles();
 }

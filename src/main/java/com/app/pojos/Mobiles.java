@@ -49,13 +49,15 @@ public class Mobiles extends BaseEntity{
 	@Column(name="tag", nullable=false)
 	private String flag;
 	
-	@ManyToOne
+	@ManyToOne(optional = true,targetEntity = Brands.class)
 	@JoinColumn(name = "brand_id",nullable = false )//=> NOT NULL constraint
 	private Brands chosenBrand;
 
 	public Mobiles() {
 		
 	}
+	//(id,mobName,mobColor,mobImage,price)
+	
 
 	public Mobiles(String mobModel, String mobName, String mobColor, String mobImage, String imei, LocalDate mdate,
 			double price, String flag) {
@@ -70,6 +72,14 @@ public class Mobiles extends BaseEntity{
 		this.flag = flag;
 	}
 
+	public Mobiles(Integer id,String mobName, String mobColor, String mobImage, double price) {
+		super.setId(id);
+		this.mobName = mobName;
+		this.mobColor = mobColor;
+		this.mobImage = mobImage;
+		this.price = price;
+
+	}
 	public String getMobModel() {
 		return mobModel;
 	}

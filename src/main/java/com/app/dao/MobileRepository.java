@@ -20,6 +20,10 @@ public interface MobileRepository extends JpaRepository<Mobiles, Integer>{
 	@Query("update Mobiles m set m.price =:price where m.id =:mid")
    void updateMobilePrice(@Param("price") double price ,@Param("mid") int mid);
 	
+	//get mobile image,color,price,name and id
+	
+	@Query("select new com.app.pojos.Mobiles(id,mobName,mobColor,mobImage,price) from Mobiles m where m.flag=:tag")
+	List<Mobiles> getAllMobilesByFlag(String tag);
 	
 	
 }

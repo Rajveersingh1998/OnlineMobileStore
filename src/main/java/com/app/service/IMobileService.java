@@ -26,8 +26,8 @@ public interface IMobileService {
 	List<Mobiles> getAllBestSellingMobiles();
 	
 	//get all Upcoming Mobiles
-	//List<MobileDTO> getAllUpcomingMobiles();
+	List<Mobiles> getAllUpcomingMobiles();
 	
 	//get all trending Mobiles
-	//List<MobileDTO> getAllTrendingMobiles();
+	List<Mobiles> getAllTrendingMobiles();
 }

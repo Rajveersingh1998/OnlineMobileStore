@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ import com.app.pojos.Specifications;
 import com.app.service.IMobileService;
 import com.app.service.ISpecsService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/specs")
 public class SpecificationController {
@@ -67,4 +68,17 @@ public class SpecificationController {
 			return new ResponseDTO<>(HttpStatus.INTERNAL_SERVER_ERROR, "Error while getting specifications", null);
 		}
 	}
+	
+	@GetMapping("/{mobileId}")
+	public ResponseDTO<?> getSpecificationsOfMobile(@PathVariable int mobileId){
+		System.out.println("in getSpecficationOfMobile");
+		try {				  
+			return  new ResponseDTO<>(HttpStatus.OK, "List of Specifications", specsService.findSpecsOfMobile(mobileId));
+		}catch (RuntimeException e) {
+			System.out.println("err in getSpecficationOfMobile : "+e);
+			return new ResponseDTO<>(HttpStatus.INTERNAL_SERVER_ERROR, "Error while getting specifications", null);
+		}
+	}
+	
+	
 }

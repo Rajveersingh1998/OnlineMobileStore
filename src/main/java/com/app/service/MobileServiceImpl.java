@@ -78,18 +78,18 @@ public class MobileServiceImpl implements IMobileService{
 	}
 
 
-//	@Override
-//	public List<MobileDTO> getAllUpcomingMobiles() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	@Override
+	public List<Mobiles> getAllUpcomingMobiles() {
+		  String up="upcoming";
+		return mobileRepo.getAllMobilesByFlag(up);
+	}
 
 
-//	@Override
-//	public List<MobileDTO> getAllTrendingMobiles() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	@Override
+	public List<Mobiles> getAllTrendingMobiles() {
+		String trend="trending";
+		return mobileRepo.getAllMobilesByFlag(trend);
+	}
 	
 	
 	

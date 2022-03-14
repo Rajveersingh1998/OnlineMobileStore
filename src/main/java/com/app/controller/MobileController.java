@@ -29,7 +29,7 @@ import com.app.service.IBrandService;
 import com.app.service.IMobileService;
 import com.app.service.ISpecsService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/mobiles")
 public class MobileController {
@@ -120,6 +120,28 @@ public class MobileController {
 		}catch (RuntimeException e) {
 			System.out.println("err in geting bs Mobiles: "+e); 
 			return new ResponseDTO<>(HttpStatus.INTERNAL_SERVER_ERROR, "ERROR while Getting BestSelling Mobiles ", null);
+		}
+	}
+	
+	@GetMapping("/upcoming")
+	public ResponseDTO<?> getUpcomingMobiles(){
+		System.out.println("in geting up Mobiles ");
+		try {		
+			return new ResponseDTO<>(HttpStatus.OK, "All upcoming mobiles" , mobileService.getAllUpcomingMobiles());
+		}catch (RuntimeException e) {
+			System.out.println("err in geting up Mobiles: "+e); 
+			return new ResponseDTO<>(HttpStatus.INTERNAL_SERVER_ERROR, "ERROR while Getting upcoming Mobiles ", null);
+		}
+	}
+	
+	@GetMapping("/trending")
+	public ResponseDTO<?> getTrendingMobiles(){
+		System.out.println("in geting trnd Mobiles ");
+		try {		
+			return new ResponseDTO<>(HttpStatus.OK, "All trending mobiles" , mobileService.getAllTrendingMobiles());
+		}catch (RuntimeException e) {
+			System.out.println("err in geting trnd Mobiles: "+e); 
+			return new ResponseDTO<>(HttpStatus.INTERNAL_SERVER_ERROR, "ERROR while Getting trending Mobiles ", null);
 		}
 	}
 	

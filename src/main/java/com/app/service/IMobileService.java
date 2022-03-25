@@ -30,4 +30,8 @@ public interface IMobileService {
 	
 	//get all trending Mobiles
 	List<Mobiles> getAllTrendingMobiles();
+	
+	//get all mobiles of selected brand
+	List<Mobiles> getAllMobilesByBrandId(int brandId);
+	
 }

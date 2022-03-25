@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.dao.BrandRepository;
+import com.app.dao.MobileRepository;
 import com.app.pojos.Brands;
+import com.app.pojos.Mobiles;
 
 @Service
 @Transactional
@@ -18,6 +20,8 @@ public class BrandService implements IBrandService {
 	@Autowired
 	private BrandRepository brandRepo;
 	
+	@Autowired
+	private MobileRepository mobileRepo;
 	
 	@Override
 	public String addBrand(Brands brd) {
@@ -50,5 +54,7 @@ public class BrandService implements IBrandService {
 		
 		return "Brand Updated Sucessfully";
 	}
-		
+
+
+	
 }

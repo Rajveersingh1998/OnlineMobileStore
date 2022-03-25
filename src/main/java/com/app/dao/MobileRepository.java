@@ -25,4 +25,10 @@ public interface MobileRepository extends JpaRepository<Mobiles, Integer>{
 	@Query("select new com.app.pojos.Mobiles(id,mobName,mobColor,mobImage,price) from Mobiles m where m.flag=:tag")
 	List<Mobiles> getAllMobilesByFlag(String tag);
 	
+	
+	//get all mobiles of selective brand
+	@Query("select m from Mobiles m join fetch m.chosenBrand where m.chosenBrand.id=:brandId")
+	List<Mobiles> getAllMobilesByBrandId(@Param("brandId")int brandId);
+	
+	
 }

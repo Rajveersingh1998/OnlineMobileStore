@@ -90,6 +90,27 @@ public class MobileServiceImpl implements IMobileService{
 		String trend="trending";
 		return mobileRepo.getAllMobilesByFlag(trend);
 	}
+
+//	public List<Product> getAllProduct(int categoryId) {
+//		List<Product> list = productRepo.getAllProduct(categoryId);
+//		List<Product> lt = new ArrayList<Product>();
+//		int index = 0;
+//		for(index = 0; index < list.size(); index++) {
+//			Product p = list.get(index);
+//			if(p.getQty() > 0)
+//				lt.add(p);
+//		}
+//		return lt;
+//	}
+	@Override
+	public List<Mobiles> getAllMobilesByBrandId(int brandId) {
+		List<Mobiles> list = mobileRepo.getAllMobilesByBrandId(brandId);
+		
+		return list;
+		
+	}
+
+
 	
 	
 	

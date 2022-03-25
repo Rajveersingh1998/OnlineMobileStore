@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.app.dto.ResponseDTO;
 import com.app.pojos.Brands;
 import com.app.service.IBrandService;
+import com.app.service.IMobileService;
 
 
 
@@ -33,6 +35,10 @@ public class BrandController {
 	 
 	   @Autowired
 	   private IBrandService brandService;
+	   
+	   @Autowired
+	   private IMobileService mobileService;
+	   
 
 	    @PostMapping("/addbrand")
 	    public ResponseEntity<Object> imageUpload(@RequestParam MultipartFile brandImg ,@RequestParam String bname) throws IOException{
@@ -89,6 +95,18 @@ public class BrandController {
 				   System.out.println("err in updateBrand : "+e);
 				return new ResponseDTO<>(HttpStatus.INTERNAL_SERVER_ERROR, "ERROR", null);
 			}	    		    	
+	    }
+	    
+	    @GetMapping("/mobiles/{brandId}")
+           public ResponseDTO<?> getMobilesOfSelectedBrand(@PathVariable int brandId){
+	    	
+	    	System.out.println("in getMobilesOfSelectedBrand");
+			try {	
+				return  new ResponseDTO<>(HttpStatus.OK, "Brands Details", mobileService.getAllMobilesByBrandId(brandId));
+			}catch (RuntimeException e) {
+				System.out.println("err in getMobilesOfSelectedBrand : "+e);
+				return new ResponseDTO<>(HttpStatus.INTERNAL_SERVER_ERROR, "ERROR", null);
+			}
 	    }
 	    
 	     

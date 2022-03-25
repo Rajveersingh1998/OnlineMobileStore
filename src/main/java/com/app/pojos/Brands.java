@@ -11,6 +11,7 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 //Hibernate follows default fetching policies for different types of asso.
 //one-to-one : EAGER
@@ -48,6 +49,7 @@ public class Brands extends BaseEntity{
 	private String brandImage;
 
 	@OneToMany(mappedBy="chosenBrand",cascade = CascadeType.ALL,orphanRemoval=true)
+	@JsonIgnore
 	private List<Mobiles> mobiles=new ArrayList<>();
 	
 	public Brands() {
@@ -76,7 +78,12 @@ public class Brands extends BaseEntity{
 		this.brandImage = brandImage;
 	}
 	
-	// Suggestion from the founder : add helper methods : for establishing the link
+	
+		public List<Mobiles> getMobiles() {
+		return mobiles;
+	}
+
+		// Suggestion from the founder : add helper methods : for establishing the link
 		// is it mandatory : NO , Optional BUT reco.
 		public void addMobiles(Mobiles m) {
 			// add mobile ref in the brand

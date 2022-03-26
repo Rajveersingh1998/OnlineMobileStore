@@ -13,29 +13,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-//Hibernate follows default fetching policies for different types of asso.
-//one-to-one : EAGER
-//one-to-many : LAZY
-//many-to-one : EAGER
-//many-to-many : LAZY
-//
-//When will hibernate throw org.hibernate.LazyInitializationException ????
-//Any time , you are trying to access un -fetched data from DB , outside the session ctx (when the entities are in DETACHED mode) .
-//
-//Solutions 
-//1. in case of size of many is small : change fetch type to eager
-//@OneToMany(mappedBy="chosenCourse",cascade=CascadeType.ALL,orphanRemoval=true,fetch=FecthType.EAGER)
-//private List<Student> students=new AL<>();
-//
-//
-//
-//
-//2. Simply access the size of the collection , within session ctx
-//Additional select query will be fired!
-//
-//3. join fetch
-//Objective : In a single query , lift course n it's asso student  details
-//eg : jpql="select c from Course c join fetch c.students  where c.title=:title";
+
 
 @Entity
 @Table(name="brands")

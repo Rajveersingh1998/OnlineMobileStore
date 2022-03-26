@@ -9,13 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.dao.AddressRepository;
+import com.app.dao.OrdersRepository;
+import com.app.dao.PaymentRepository;
 import com.app.dao.UserRepository;
 import com.app.dto.DtoEntityConverter;
 import com.app.dto.LoginRequest;
+import com.app.dto.OrderDTO;
 import com.app.dto.UserDTO;
 import com.app.pojos.Address;
+import com.app.pojos.OrderDetails;
+import com.app.pojos.Payment;
 import com.app.pojos.Role;
 import com.app.pojos.Users;
+
 
 @Service
 @Transactional
@@ -28,6 +34,10 @@ public class UsersServiceImpl implements IUsersService{
 	private DtoEntityConverter converter;
 	@Autowired
 	private AddressRepository adrRepo;
+	@Autowired
+	private OrdersRepository orderRepo;
+	@Autowired
+	private PaymentRepository paymentRepo;
 	
 	//BL
 	//Authenticate Admin
@@ -67,5 +77,29 @@ public class UsersServiceImpl implements IUsersService{
 	
 		return user.getEmail();
 	}
+
+	@Override
+	public Users getUserByID(int uid) {
+		
+		return userRepo.findById(uid).orElseThrow(()-> new RuntimeException("Error in get user by ID"+uid));
+	}
+
+	@Override
+	public int saveOrderDetails(OrderDetails newOrder) {
+		
+		if(orderRepo.save(newOrder)!= null) {
+			return newOrder.getId();
+		}
+		
+		return 0;
+	}
+
+	@Override
+	public void payment(Payment newPayment) {
+		
+		
+	}
+	
+	
 	
 }

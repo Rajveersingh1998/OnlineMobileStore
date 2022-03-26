@@ -3,7 +3,10 @@ package com.app.service;
 import java.util.List;
 
 import com.app.dto.LoginRequest;
+import com.app.dto.OrderDTO;
 import com.app.dto.UserDTO;
+import com.app.pojos.OrderDetails;
+import com.app.pojos.Payment;
 import com.app.pojos.Users;
 
 public interface IUsersService {
@@ -19,4 +22,13 @@ public interface IUsersService {
 	 
 	//CUSTOMER----->Registering new user
 	String saveUser(UserDTO userDto);
+	
+	//CUSTOMER----->SaveOrderDetails
+	int saveOrderDetails(OrderDetails newOrder);
+	
+	//CUSTOMER----->Payment
+	void payment(Payment newPayment);
+	
+	//find user by ID
+	Users getUserByID(int uid);
 }

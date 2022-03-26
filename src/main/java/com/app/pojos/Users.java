@@ -1,11 +1,15 @@
 package com.app.pojos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -41,12 +45,18 @@ public class Users extends BaseEntity{
 	  @JoinColumn(name="user_adr",nullable = false)
 	  private Address address;
 	  
+	  
+	    @OneToMany(mappedBy="userOrder",cascade = CascadeType.ALL,orphanRemoval=true)
+		@JsonIgnore
+		private List<OrderDetails> OrderDetails=new ArrayList<>();
+	    
+	    @OneToMany(mappedBy="userId",cascade = CascadeType.ALL,orphanRemoval=true)
+		@JsonIgnore
+		private List<Payment> payments=new ArrayList<>();
+	  
 	public Users() {
 		
 	}
-
-
-	
 
 
 	public Users(String firstName, String lastName, String email, String mobileNo, String password, Role role,

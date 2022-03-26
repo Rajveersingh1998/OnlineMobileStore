@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.LoginRequest;
+import com.app.dto.OrderDTO;
 import com.app.dto.ResponseDTO;
 import com.app.dto.UserDTO;
+import com.app.pojos.OrderDetails;
 import com.app.pojos.Users;
 import com.app.service.IUsersService;
 
@@ -47,7 +49,59 @@ public class CustomerController {
 		}catch(RuntimeException e) {
 			return new ResponseDTO<>(HttpStatus.INTERNAL_SERVER_ERROR, "Customer Already exist !!ERROR'", null);
 		}
-			
-		
+				
 	}
+	
+	@PostMapping("/orders")
+    public ResponseDTO<?> orderPlaced(@RequestBody OrderDTO newOrder) {
+		
+		System.out.println("in order placed");
+		System.out.println(newOrder.getUid());
+		try {
+			Users isExist = userService.getUserByID(newOrder.getUid());
+			if(isExist != null) {
+				OrderDetails newOdr = new OrderDetails();
+				newOdr.setDeliveryDate(newOrder.getDdate());
+				newOdr.setOrderDate(newOrder.getOdate());
+				newOdr.setMobileId(newOrder.getMid());
+				newOdr.setTotalPrice(newOrder.getTotalPrice());
+				newOdr.setUserOrder(isExist);
+			int orderId = userService.saveOrderDetails(newOdr);
+			return new ResponseDTO<>(HttpStatus.OK, "Customer Added sucessfully",orderId );
+			}else {
+				return new ResponseDTO<>(HttpStatus.SERVICE_UNAVAILABLE, "ERROR",null);
+			}
+		
+		}catch(RuntimeException e) {
+			return new ResponseDTO<>(HttpStatus.INTERNAL_SERVER_ERROR, " !!ERROR'", null);
+		}
+				
+	}
+	
+//	@PostMapping("/orders")
+//    public ResponseDTO<?> payment(@RequestBody OrderDTO newOrder) {
+//		
+//		System.out.println("in order placed");
+//		System.out.println(newOrder.getUid());
+//		try {
+//			Users isExist = userService.getUserByID(newOrder.getUid());
+//			if(isExist != null) {
+//				OrderDetails newOdr = new OrderDetails();
+//				newOdr.setDeliveryDate(newOrder.getDdate());
+//				newOdr.setOrderDate(newOrder.getOdate());
+//				newOdr.setMobileId(newOrder.getMid());
+//				newOdr.setTotalPrice(newOrder.getTotalPrice());
+//				newOdr.setUserOrder(isExist);
+//			int orderId = userService.saveOrderDetails(newOdr);
+//			return new ResponseDTO<>(HttpStatus.OK, "Customer Added sucessfully",orderId );
+//			}else {
+//				return new ResponseDTO<>(HttpStatus.SERVICE_UNAVAILABLE, "ERROR",null);
+//			}
+//		
+//		}catch(RuntimeException e) {
+//			return new ResponseDTO<>(HttpStatus.INTERNAL_SERVER_ERROR, " !!ERROR'", null);
+//		}
+//				
+//	}
+	
 }

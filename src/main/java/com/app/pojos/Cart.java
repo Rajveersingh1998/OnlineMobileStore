@@ -2,90 +2,100 @@ package com.app.pojos;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="cart")
 public class Cart extends BaseEntity{
     
-	@Column( unique=true)
-	private int userId;
-	private int mobId;
-	private int brandId;
-	private int quantity;
-	private double amount;
+	@Column(name="totalAmount")
+	private double totalAmt;
+	
+	@Column(name="quantity")
+	private int qty;
+
+	
+	@ManyToOne(optional = true,targetEntity = Users.class)
+	@JoinColumn(name = "user_id",nullable = false )//=> NOT NULL constraint
+	private Users userId;
+	
+	@ManyToOne(optional = true,targetEntity = Brands.class)
+	@JoinColumn(name = "brand_id",nullable = false )//=> NOT NULL constraint
+	private Brands brandId;
+	
+	@ManyToOne(optional = true,targetEntity = Mobiles.class)
+	@JoinColumn(name = "mobile_id",nullable = false )//=> NOT NULL constraint
+	private Mobiles mobileId;
 	
 	
 	public Cart() {
-	
-	}
-
-
-	public Cart(int userId, int mobId, int brandId, int quantity, double amount) {
 		super();
-		this.userId = userId;
-		this.mobId = mobId;
-		this.brandId = brandId;
-		this.quantity = quantity;
-		this.amount = amount;
 	}
 
 
-	public int getUserId() {
-		return userId;
-	}
+public Cart(double totalAmt, int qty) {
+	super();
+	this.totalAmt = totalAmt;
+	this.qty = qty;
+}
 
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+public double getTotalAmt() {
+	return totalAmt;
+}
 
 
-	public int getMobId() {
-		return mobId;
-	}
+public void setTotalAmt(double totalAmt) {
+	this.totalAmt = totalAmt;
+}
 
 
-	public void setMobId(int mobId) {
-		this.mobId = mobId;
-	}
+public int getQty() {
+	return qty;
+}
 
 
-	public int getBrandId() {
-		return brandId;
-	}
+public void setQty(int qty) {
+	this.qty = qty;
+}
 
 
-	public void setBrandId(int brandId) {
-		this.brandId = brandId;
-	}
+public Users getUserId() {
+	return userId;
+}
 
 
-	public int getQuantity() {
-		return quantity;
-	}
+public void setUserId(Users userId) {
+	this.userId = userId;
+}
 
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+public Brands getBrandId() {
+	return brandId;
+}
 
 
-	public double getAmount() {
-		return amount;
-	}
+public void setBrandId(Brands brandId) {
+	this.brandId = brandId;
+}
 
 
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
+public Mobiles getMobileId() {
+	return mobileId;
+}
 
 
-	@Override
-	public String toString() {
-		return "Cart [userId=" + userId + ", mobId=" + mobId + ", brandId=" + brandId + ", quantity=" + quantity
-				+ ", amount=" + amount + "]";
-	}
+public void setMobileId(Mobiles mobileId) {
+	this.mobileId = mobileId;
+}
+
+
+@Override
+public String toString() {
+	return "Cart [totalAmt=" + totalAmt + ", qty=" + qty + "]";
+}
 	
 	
 }

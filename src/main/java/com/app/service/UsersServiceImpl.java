@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.dao.AddressRepository;
+import com.app.dao.CartRepository;
 import com.app.dao.OrdersRepository;
 import com.app.dao.PaymentRepository;
 import com.app.dao.UserRepository;
@@ -17,6 +18,7 @@ import com.app.dto.LoginRequest;
 import com.app.dto.OrderDTO;
 import com.app.dto.UserDTO;
 import com.app.pojos.Address;
+import com.app.pojos.Cart;
 import com.app.pojos.OrderDetails;
 import com.app.pojos.Payment;
 import com.app.pojos.Role;
@@ -38,6 +40,8 @@ public class UsersServiceImpl implements IUsersService{
 	private OrdersRepository orderRepo;
 	@Autowired
 	private PaymentRepository paymentRepo;
+	@Autowired
+	private CartRepository cartRepo;
 	
 	//BL
 	//Authenticate Admin
@@ -83,6 +87,14 @@ public class UsersServiceImpl implements IUsersService{
 		
 		return userRepo.findById(uid).orElseThrow(()-> new RuntimeException("Error in get user by ID"+uid));
 	}
+	
+	
+
+	@Override
+	public OrderDetails getOrderByID(int oid) {
+		
+		return orderRepo.findById(oid).orElseThrow(()-> new RuntimeException("Error in get order by ID"+oid));
+	}
 
 	@Override
 	public int saveOrderDetails(OrderDetails newOrder) {
@@ -96,9 +108,35 @@ public class UsersServiceImpl implements IUsersService{
 
 	@Override
 	public void payment(Payment newPayment) {
+		System.out.println("in service payment method");
+		try {
+		paymentRepo.save(newPayment);
 		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
+
+	@Override
+	public Cart addItemToUsersCart(Cart newCart) {
+		
+		return cartRepo.save(newCart);
+	}
+
+	@Override
+	public List<Cart> getUserCartItems(int uid) {
+		
+		return cartRepo.findByUserId(uid);
+	}
+
+	@Override
+	public String removeItemFromCart(int productId) {
+		
+		cartRepo.deleteById(productId);
+		return "Item Removed Sucessfully";
+	}
+	
 	
 	
 	

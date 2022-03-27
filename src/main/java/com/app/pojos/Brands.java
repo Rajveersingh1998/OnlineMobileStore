@@ -30,6 +30,10 @@ public class Brands extends BaseEntity{
 	@JsonIgnore
 	private List<Mobiles> mobiles=new ArrayList<>();
 	
+	@OneToMany(mappedBy="brandId",cascade = CascadeType.ALL,orphanRemoval=true)
+	@JsonIgnore
+	private List<Cart> brandInCart=new ArrayList<>();
+	
 	public Brands() {
 		
 	}

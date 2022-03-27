@@ -2,13 +2,17 @@ package com.app.pojos;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -46,12 +50,16 @@ public class Mobiles extends BaseEntity{
 	@JsonProperty("mprice")
 	private double price;
 	
-	@Column(name="tag", nullable=false)
+	@Column(name="tag")
 	private String flag;
 	
 	@ManyToOne(optional = true,targetEntity = Brands.class)
 	@JoinColumn(name = "brand_id",nullable = false )//=> NOT NULL constraint
 	private Brands chosenBrand;
+	
+	@OneToMany(mappedBy="mobileId",cascade = CascadeType.ALL,orphanRemoval=true)
+	@JsonIgnore
+	private List<Cart> mobileInCart=new ArrayList<>();
 
 	public Mobiles() {
 		

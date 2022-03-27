@@ -53,6 +53,10 @@ public class Users extends BaseEntity{
 	    @OneToMany(mappedBy="userId",cascade = CascadeType.ALL,orphanRemoval=true)
 		@JsonIgnore
 		private List<Payment> payments=new ArrayList<>();
+	    
+	    @OneToMany(mappedBy="userId",cascade = CascadeType.ALL,orphanRemoval=true)
+		@JsonIgnore
+		private List<Cart> userCart=new ArrayList<>();
 	  
 	public Users() {
 		

@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -13,7 +12,7 @@ import javax.persistence.Table;
 public class Payment extends BaseEntity{
 
 
-    @MapsId
+    //@MapsId
     @OneToOne
     @JoinColumn(name = "order_id")
     private OrderDetails order;
@@ -66,6 +65,22 @@ public double getTotalAmt() {
 
 public void setTotalAmt(double totalAmt) {
 	this.totalAmt = totalAmt;
+}
+
+public OrderDetails getOrder() {
+	return order;
+}
+
+public void setOrder(OrderDetails order) {
+	this.order = order;
+}
+
+public Users getUserId() {
+	return userId;
+}
+
+public void setUserId(Users userId) {
+	this.userId = userId;
 }
 
 @Override

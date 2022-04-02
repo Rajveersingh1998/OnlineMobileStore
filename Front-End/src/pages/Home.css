@@ -1,0 +1,13 @@
+.container1{
+    margin-top: 120px;
+}
+
+.counter:hover{
+    transition: 0.4s;
+    transform: scale(1.1);
+}
+
+.text-left{
+    color: rgb(13, 13, 83);
+    font-weight: 500;
+}

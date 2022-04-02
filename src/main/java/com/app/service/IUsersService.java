@@ -7,6 +7,7 @@ import com.app.dto.UserDTO;
 import com.app.pojos.Cart;
 import com.app.pojos.OrderDetails;
 import com.app.pojos.Payment;
+import com.app.pojos.Role;
 import com.app.pojos.Users;
 
 public interface IUsersService {
@@ -44,4 +45,5 @@ public interface IUsersService {
 	//delete from cart
 	String removeItemFromCart(int productId);
 	
+	Role findRole(String emailId);
 }

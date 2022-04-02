@@ -38,6 +38,10 @@ public class Mobiles extends BaseEntity{
 	@Column(length = 20 ,nullable=false)
 	private String mobImage;
 	
+	@Column(nullable=false )
+	@JsonProperty("avlQty")
+	private int quantity;
+	
 	@Column(unique = true, nullable=false)
 	@JsonProperty("imei")
 	private String imei;
@@ -79,6 +83,22 @@ public class Mobiles extends BaseEntity{
 		this.price = price;
 		this.flag = flag;
 	}
+    
+	
+	public Mobiles(String mobModel, String mobName, String mobColor, String mobImage, int quantity, String imei,
+			LocalDate manufDate, double price, String flag) {
+		super();
+		this.mobModel = mobModel;
+		this.mobName = mobName;
+		this.mobColor = mobColor;
+		this.mobImage = mobImage;
+		this.quantity = quantity;
+		this.imei = imei;
+		this.manufDate = manufDate;
+		this.price = price;
+		this.flag = flag;
+	}
+
 
 	public Mobiles(Integer id,String mobName, String mobColor, String mobImage, double price) {
 		super.setId(id);
@@ -159,6 +179,26 @@ public class Mobiles extends BaseEntity{
 	public void setChosenBrand(Brands chosenBrand) {
 		this.chosenBrand = chosenBrand;
 	}
+    
+	public List<Cart> getMobileInCart() {
+		return mobileInCart;
+	}
+
+
+	public void setMobileInCart(List<Cart> mobileInCart) {
+		this.mobileInCart = mobileInCart;
+	}
+
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
 
 	@Override
 	public String toString() {

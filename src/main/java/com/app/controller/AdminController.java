@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.LoginRequest;
 import com.app.dto.ResponseDTO;
+import com.app.pojos.Role;
 import com.app.pojos.Users;
 import com.app.service.IUsersService;
 
@@ -30,10 +31,15 @@ public class AdminController {
 	@PostMapping("/signin")
 	public ResponseDTO<?> authenticateUser(@RequestBody LoginRequest loginRequest){
 		System.out.println("in authenticateUser: "+loginRequest);
-		try {		
+		try {	
+			
+			if(userService.findRole(loginRequest.getEmail()).toString().toUpperCase().equals(loginRequest.getRole().toString().toUpperCase())) {
 			Users u = userService.authenticateUser(loginRequest);
+			
 			System.out.println("Users : "+u);
 			return new ResponseDTO<>(HttpStatus.OK, "login sucessfully", u);
+			}else
+				return new ResponseDTO<>(HttpStatus.NOT_FOUND, "login sucessfully", null);
 		}catch (RuntimeException e) {
 			System.out.println("err in authenticateUser : "+e);
 			return new ResponseDTO<>(HttpStatus.INTERNAL_SERVER_ERROR, "Error", null);

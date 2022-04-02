@@ -48,12 +48,12 @@ public class MobileServiceImpl implements IMobileService{
 
 
 	@Override
-	public Mobiles updateMobilePrice(double price, int mid) {
+	public Mobiles updateMobilePrice(double price, int mid,String newTag) {
 		
 		Optional<Mobiles> mobile = mobileRepo.findById(mid);
 		if(mobile.isPresent()) {
 			 
-			mobileRepo.updateMobilePrice( price,mid);
+			mobileRepo.updateMobilePrice( price,mid,newTag);
 		}
 		return mobile.orElseThrow(()-> new RuntimeException("Mobile not found Cannot Update"));
 	}

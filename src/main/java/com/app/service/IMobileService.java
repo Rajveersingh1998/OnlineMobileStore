@@ -17,7 +17,7 @@ public interface IMobileService {
 	Mobiles getMobileById(int mid);
 	
 	//update mobile
-	Mobiles updateMobilePrice(double price,int mid);
+	Mobiles updateMobilePrice(double price,int mid,String newTag);
 	
 	//delete Mobile by id
 	String deleteMobile(int mobileId);

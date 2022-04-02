@@ -12,10 +12,13 @@ public class CartDTO {
 	private int uid;
 	private int mid;
 	private int bid;
+	private String ram;
+	private String storage;
 	
 	public CartDTO() {
 	
 	}
+	
 	public CartDTO(int amount, int qty, int uid, int mid, int bid) {
 		super();
 		this.amount = amount;
@@ -53,6 +56,20 @@ public class CartDTO {
 	}
 	public void setBid(int bid) {
 		this.bid = bid;
+	}
+	
+	
+	public String getRam() {
+		return ram;
+	}
+	public void setRam(String ram) {
+		this.ram = ram;
+	}
+	public String getStorage() {
+		return storage;
+	}
+	public void setStorage(String storage) {
+		this.storage = storage;
 	}
 	@Override
 	public String toString() {

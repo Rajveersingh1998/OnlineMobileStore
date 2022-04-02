@@ -19,6 +19,8 @@ public interface UserRepository extends JpaRepository<Users, Integer> {
 	@Query("select u from Users u where u.email=:em and u.password=:pass")
 	Optional<Users> authenticateUser(@Param("em")String em, @Param("pass")String pass);
 	
+	@Query("select u.role from Users u where u.email=?1")
+	Role findRoleById(String emailId);
 	//get all customers
 	List<Users> findByRole(Role role);
 	

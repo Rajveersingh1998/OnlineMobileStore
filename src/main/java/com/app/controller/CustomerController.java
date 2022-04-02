@@ -2,6 +2,7 @@ package com.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +23,11 @@ import com.app.pojos.Cart;
 import com.app.pojos.Mobiles;
 import com.app.pojos.OrderDetails;
 import com.app.pojos.Payment;
+import com.app.pojos.Role;
 import com.app.pojos.Specifications;
 import com.app.pojos.Users;
 import com.app.service.IBrandService;
+import com.app.service.IEmailSenderService;
 import com.app.service.IMobileService;
 import com.app.service.IUsersService;
 
@@ -42,13 +45,17 @@ public class CustomerController {
 	@Autowired
 	private IMobileService mobileService;
 	
+	
 	@PostMapping("/signin")
 	public ResponseDTO<?> authenticateUser(@RequestBody LoginRequest loginRequest){
 		System.out.println("in authenticateUser: "+loginRequest);
-		try {		
+		try {	
+			if(userService.findRole(loginRequest.getEmail()).toString().toUpperCase().equals(loginRequest.getRole().toString().toUpperCase())) {
 			Users u = userService.authenticateUser(loginRequest);
 			System.out.println("Users : "+u);
 			return new ResponseDTO<>(HttpStatus.OK, "login sucessfully", u);
+			}else
+				return new ResponseDTO<>(HttpStatus.NOT_FOUND, "login sucessfully", null);
 		}catch (RuntimeException e) {
 			System.out.println("err in authenticateUser : "+e);
 			return new ResponseDTO<>(HttpStatus.INTERNAL_SERVER_ERROR, "Error", null);
@@ -73,6 +80,7 @@ public class CustomerController {
 		
 		System.out.println("in order placed");
 		System.out.println(newOrder.getUid());
+		System.out.println(newOrder.getMid());
 		try {
 			Users isExist = userService.getUserByID(newOrder.getUid());
 			if(isExist != null) {
@@ -83,6 +91,7 @@ public class CustomerController {
 				newOdr.setTotalPrice(newOrder.getTotalPrice());
 				newOdr.setUserOrder(isExist);
 			int orderId = userService.saveOrderDetails(newOdr);
+
 			return new ResponseDTO<>(HttpStatus.OK, "Orderplaced sucessfully",orderId );
 			}else {
 				return new ResponseDTO<>(HttpStatus.SERVICE_UNAVAILABLE, "ERROR",null);
@@ -95,7 +104,7 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/payment")
-    public ResponseDTO<?> payment(@RequestBody PaymentDTO newPayment) {
+    public ResponseDTO<?> payment(@RequestBody PaymentDTO newPayment) throws MailException, InterruptedException{
 		
 		System.out.println("in payment method");
 		System.out.println(newPayment.getUid());
@@ -103,7 +112,8 @@ public class CustomerController {
 			Users isExist = userService.getUserByID(newPayment.getUid());
 			OrderDetails isPresent = userService.getOrderByID(newPayment.getOid()); 
 			if(isExist != null) {
-				
+				System.out.println(isExist.getEmail());
+			   
                Payment pay = new Payment();
                pay.setAccHolderName(newPayment.getAccHolderName());
                pay.setCardNumber(newPayment.getCardNumber());
@@ -113,7 +123,7 @@ public class CustomerController {
                System.out.println(pay);
                
                userService.payment(pay);
-               
+//   			emailService.sendSimpleEmail(isExist.getEmail(), "Wooohoooooo!!! Your Order Placed SucessFully", "orderplaced");
 			return new ResponseDTO<>(HttpStatus.OK, "Payment Done sucessfully",isExist);
 			}else {
 				return new ResponseDTO<>(HttpStatus.SERVICE_UNAVAILABLE, "ERROR",null);
@@ -142,6 +152,8 @@ public ResponseDTO<?> addToCart(@RequestBody CartDTO item) {
 				newCart.setBrandId(isPresent);
 				newCart.setMobileId(isAvailable);
 				newCart.setUserId(isExist);
+				newCart.setRam(item.getRam());
+				newCart.setStorage(item.getStorage());
              
                Cart addedItemDetails = userService.addItemToUsersCart(newCart);
                

@@ -51,6 +51,14 @@ public class UsersServiceImpl implements IUsersService{
 			                 .orElseThrow(() -> new RuntimeException("User ID not found!!!!"));
 	}
 
+	
+	@Override
+	public Role findRole(String emailId) {
+		
+		return userRepo.findRoleById(emailId);
+	}
+
+
 	//ADMIN--->get all customers
 	@Override
 	public List<Users> getAllCustomers() {

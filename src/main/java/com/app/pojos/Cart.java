@@ -16,6 +16,11 @@ public class Cart extends BaseEntity{
 	@Column(name="quantity")
 	private int qty;
 
+	@Column(name="RAM", length = 20)
+	private String ram;
+	
+	@Column(name="storage", length = 20)
+	private String storage;
 	
 	@ManyToOne(optional = true,targetEntity = Users.class)
 	@JoinColumn(name = "user_id",nullable = false )//=> NOT NULL constraint
@@ -30,16 +35,20 @@ public class Cart extends BaseEntity{
 	private Mobiles mobileId;
 	
 	
+	
 	public Cart() {
 		super();
 	}
 
 
-public Cart(double totalAmt, int qty) {
-	super();
-	this.totalAmt = totalAmt;
-	this.qty = qty;
-}
+public Cart(double totalAmt, int qty, String ram, String storage) {
+		super();
+		this.totalAmt = totalAmt;
+		this.qty = qty;
+		this.ram = ram;
+		this.storage = storage;
+	}
+
 
 
 public double getTotalAmt() {
@@ -89,6 +98,26 @@ public Mobiles getMobileId() {
 
 public void setMobileId(Mobiles mobileId) {
 	this.mobileId = mobileId;
+}
+
+
+public String getRam() {
+	return ram;
+}
+
+
+public void setRam(String ram) {
+	this.ram = ram;
+}
+
+
+public String getStorage() {
+	return storage;
+}
+
+
+public void setStorage(String storage) {
+	this.storage = storage;
 }
 
 

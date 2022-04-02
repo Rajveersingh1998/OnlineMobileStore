@@ -1,19 +1,25 @@
 package com.app.dto;
 
-import javax.persistence.Column;
-
-import com.app.pojos.Role;
 
 public class LoginRequest {
-	@Column(length = 30, nullable = false, unique = true)
+	
 	private String email;
-	@Column(length = 20, nullable = false)
+	
 	private String password;
-//	@Column(length = 20 , nullable = false)
-//	private Role role;
+
+	private String role;
+	
 	public LoginRequest() {
 	
 	}
+	
+	public LoginRequest(String email, String password, String role) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.role = role;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -26,12 +32,13 @@ public class LoginRequest {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-//	public Role getRole() {
-//		return role;
-//	}
-//	public void setRole(Role role) {
-//		this.role = role;
-//	}
+
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 	@Override
 	public String toString() {
 		return "LoginRequest [email=" + email + ", password=" + password +  "]";

@@ -60,7 +60,7 @@ public class MobileController {
 	
 	@PostMapping("/addMobile")
 	 public ResponseDTO<?> addMobile(@RequestParam MultipartFile mthumb ,@RequestParam String mmodel,@RequestParam String mname,@RequestParam String mcolor,@RequestParam String imei, 
-			                @RequestParam  @DateTimeFormat(pattern = "yyyy-MM-dd") String mdate,@RequestParam double mprice,@RequestParam int mbrand) throws IOException{
+			                @RequestParam  @DateTimeFormat(pattern = "yyyy-MM-dd") String mdate,@RequestParam double mprice,@RequestParam int mqty,@RequestParam int mbrand) throws IOException{
         System.out.println("in add mobile");
         File imageFile = new File(FILE+mthumb.getOriginalFilename());
         imageFile.createNewFile();
@@ -70,11 +70,12 @@ public class MobileController {
         Brands isBrandExist = brandService.findBrandBYId(mbrand);
         if(isBrandExist != null) {
         	
-        	  Mobiles newMobile = new Mobiles(mmodel,mname,mcolor,mthumb.getOriginalFilename(),imei,LocalDate.parse(mdate),mprice,"bestSell");
+        	  Mobiles newMobile = new Mobiles(mmodel,mname,mcolor,mthumb.getOriginalFilename(),mqty,imei,LocalDate.parse(mdate),mprice,"bestSell");
         	  newMobile.setChosenBrand(isBrandExist);
         	  mobileService.addMobile(newMobile);
         	  
         	  return new ResponseDTO<>(HttpStatus.OK,"Mobile Added sucessfully",mthumb.getOriginalFilename());
+        	  
         }else {
         	return new ResponseDTO<>(HttpStatus.NOT_FOUND,"Cannot add Mobile",null);
         }     
@@ -83,8 +84,9 @@ public class MobileController {
 	@PutMapping("/update/{mobileId}")
 	public ResponseDTO<?> updateMobile(@RequestBody Mobiles mobile, @PathVariable int mobileId){
 		System.out.println("in updateMobile ");
+		System.out.println(mobile.getPrice()+" "+mobile.getFlag());
 		try {		
-			mobileService.updateMobilePrice(mobile.getPrice(), mobileId);
+			mobileService.updateMobilePrice(mobile.getPrice(), mobileId,mobile.getFlag());
 			return new ResponseDTO<>(HttpStatus.OK, "Mobile Price Updated Sucessfully :" , mobile.getPrice());
 		}catch (RuntimeException e) {
 			System.out.println("err in Updating: "+e); 

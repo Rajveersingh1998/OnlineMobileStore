@@ -1,0 +1,29 @@
+.btn-media {
+    width: 30px;
+    height: 30px;
+  }
+  
+  tr:hover {
+    cursor: pointer;
+  }
+  .thumbnail{
+    width:300px;
+    height:180px;
+  }
+  
+  .mimage{
+    
+      width: 500px;
+      height: 500px;
+      border-radius: 5px;
+      margin-right: 150px;
+      margin-top: 20px;
+  }
+  .style{
+    max-width: 850px;
+  }
+  .card-text{
+    margin-left: 250px;
+    margin-top: 20px;
+  }
+    

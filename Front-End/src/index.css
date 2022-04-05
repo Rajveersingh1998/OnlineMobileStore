@@ -5,20 +5,25 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+   background-color:#e4e4de;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
 .page-title {
-  text-align: center;
   margin: 20px;
+  text-align: center;
 }
-
-.thumbnail-sm {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+.sign-in {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+.sign-up {
+  margin: auto;
+  max-width: 500px;
+  height:80px;
+  padding: 10px;
 }

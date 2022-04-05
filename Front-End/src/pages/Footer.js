@@ -51,7 +51,7 @@ const Footer = () => {
 						</FooterLink>
 
 						<FooterLink href="#">
-							<i className="fa fa-envelope"> <b><ore>  Email us:</ore></b>
+							<i className="fa fa-envelope"> <b>Email us:</b>
 							</i>
 							<span style={{ marginLeft: "10px" }}>
 								www.mobigo.ir@gmail.com
@@ -107,7 +107,7 @@ const Footer = () => {
 				<div className="footer-copyright text-center py-3 " >
 					<Card.Header className="mt-4">
 						&copy; {new Date().getFullYear()} Copyright:{" "}
-						<a href="#"> Akshay Zambre (Pg-DAC IACSD Sept-2021)</a>
+						<a href="#"> Akshay-Zambre && Rajveer-Singh(Pg-DAC IACSD Sept-2021)</a>
 					</Card.Header>
 				</div>
 			</Container>

@@ -1,0 +1,51 @@
+.title {
+    font-size: 25px;
+    font-weight: bold;
+    text-transform:inherit;
+    font-weight: 1200;
+  }
+  
+  .image {
+    width: 250px;
+    height: 250px;
+    border-radius: 5px;
+    box-shadow: 10px 10px 5px rgb(106, 140, 146);
+
+  }
+  .item-title {
+    font-size: 95%;
+    font-weight: bold;
+    text-transform: capitalize;
+    letter-spacing: 0.8px;
+    font-weight: 900;
+    margin-top: 10px;
+  }
+
+  .item-container {
+    float: left;
+    margin: 30px;
+  }
+  
+  .slider-container {
+    clear: both;
+    padding-bottom: 70px;
+    border-bottom: solid rgb(8, 8, 8) 0px;
+    height: 320px;
+    margin-top: 5px;
+  }
+  .item-address {
+    font-size: 95%;
+    text-transform: capitalize;
+    letter-spacing: 0.8px;
+    font-weight: 900;
+    margin-top: 10px;
+  }
+  
+  .card-text{
+    margin-left: 200px;
+    margin-top: 10px;
+  }
+  
+  .style{
+    max-width: 850px;
+  }

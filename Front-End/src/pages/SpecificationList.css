@@ -1,0 +1,40 @@
+.btn-media {
+  width: 10px;
+  height: 10px;
+}
+
+tr:hover {
+  cursor: pointer;
+}
+.thumbnail{
+  width:300px;
+  height:180px;
+}
+
+.mobimage{
+  width: 350px;
+  height: 350px;
+  border-radius: 5px;
+  margin-right: 100px;
+  margin-top: 20px;
+}
+.style{
+  max-width: 850px;
+}
+.card-text{
+  margin-left: 250px;
+  margin-top: 20px;
+}
+  
+.bstyle{
+  margin-left: 200px;
+}
+
+.text{
+  margin-top: 20px;
+  margin-left: 200px;
+}
+
+.mrgn{
+  margin-left: 100px;
+}

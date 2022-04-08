@@ -1,0 +1,20 @@
+.btn-media {
+    width: 30px;
+    height: 30px;
+  }
+
+  tr:hover {
+    cursor: pointer;
+  }
+  .thumbnail{
+    width:300px;
+    height:180px;
+  }
+
+  .image {
+    width: 250px;
+    height: 200px;
+    border-radius: 5px;
+    box-shadow: 10px 10px 5px rgb(106, 140, 146);
+
+  }

@@ -31,4 +31,7 @@ public interface UserRepository extends JpaRepository<Users, Integer> {
 	 Users save(Users user);
 	 
 	 Optional<Users> findByEmail(String emailId);
+	 
+	 @Query("select u.password from Users u where u.email=?1")
+	 String getUserPass(String email);
 }

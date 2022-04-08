@@ -46,4 +46,8 @@ public interface IUsersService {
 	String removeItemFromCart(int productId);
 	
 	Role findRole(String emailId);
+	
+	String getUserPassword(String email);
+	
+	Users findUserByEmail(String email);
 }

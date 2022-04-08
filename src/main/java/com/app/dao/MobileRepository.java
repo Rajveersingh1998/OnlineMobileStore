@@ -18,7 +18,7 @@ public interface MobileRepository extends JpaRepository<Mobiles, Integer>{
 	//update selected mobile	
 	@Modifying
 	@Query("update Mobiles m set m.price =:price, m.flag=:tag where m.id =:mid")
-    void updateMobilePrice(@Param("price") double price ,@Param("mid") int mid,@Param("tag") String tag);
+    int updateMobilePrice(@Param("price") double price ,@Param("mid") int mid,@Param("tag") String tag);
 	
 	
 	//get mobile image,color,price,name and id	

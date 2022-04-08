@@ -15,7 +15,6 @@ import com.app.dao.PaymentRepository;
 import com.app.dao.UserRepository;
 import com.app.dto.DtoEntityConverter;
 import com.app.dto.LoginRequest;
-import com.app.dto.OrderDTO;
 import com.app.dto.UserDTO;
 import com.app.pojos.Address;
 import com.app.pojos.Cart;
@@ -45,13 +44,21 @@ public class UsersServiceImpl implements IUsersService{
 	
 	//BL
 	//Authenticate Admin
+//	@Override
+//	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+//		Users user = userRepo.findByEmail(email).orElseThrow(()-> new UsernameNotFoundException("Deatils Not found"));
+//		//-->user details found
+//		return new CustomUserDetails(user);
+//	}
+	
+	
 	@Override
 	public Users authenticateUser(LoginRequest loginRequest) {		
 	   return userRepo.authenticateUser(loginRequest.getEmail(), loginRequest.getPassword())
 			                 .orElseThrow(() -> new RuntimeException("User ID not found!!!!"));
 	}
 
-	
+
 	@Override
 	public Role findRole(String emailId) {
 		
@@ -80,13 +87,15 @@ public class UsersServiceImpl implements IUsersService{
 		Optional<Users> userExist = userRepo.findByEmail(userDto.getEmail());
 		if(userExist.isPresent()) {
 			throw new RuntimeException("Email Already Exist");
-		}
+		}		
+		System.out.println("in saveUser1");
 		Address adr = converter.userAddress(userDto);	
 		adrRepo.save(adr);	
-		
+		System.out.println("in saveUser2");
 		Users user= converter.toUserEntity(userDto, adr);
+		System.out.println("in saveUser2");
 		userRepo.save(user);	
-	
+		
 		return user.getEmail();
 	}
 
@@ -143,6 +152,21 @@ public class UsersServiceImpl implements IUsersService{
 		
 		cartRepo.deleteById(productId);
 		return "Item Removed Sucessfully";
+	}
+
+
+	@Override
+	public String getUserPassword(String email) {
+		
+		return userRepo.getUserPass(email);
+	}
+
+
+	@Override
+	public Users findUserByEmail(String email) {
+		Users u = userRepo.findByEmail(email).get();
+		
+		return u;
 	}
 	
 	

@@ -37,6 +37,9 @@ public class MobileController {
 	 @Value("${file.upload-dir}")
      private String FILE;
 	 
+	 @Value("${file.upload-dir1}")
+	 private String FILE1;
+	 
 	//Dependency injection
 	@Autowired
 	private IMobileService mobileService;
@@ -63,10 +66,19 @@ public class MobileController {
 			                @RequestParam  @DateTimeFormat(pattern = "yyyy-MM-dd") String mdate,@RequestParam double mprice,@RequestParam int mqty,@RequestParam int mbrand) throws IOException{
         System.out.println("in add mobile");
         File imageFile = new File(FILE+mthumb.getOriginalFilename());
+        File imageFile1=new File(FILE1+mthumb.getOriginalFilename());
+        
         imageFile.createNewFile();
+        imageFile1.createNewFile();
+        //create file
         FileOutputStream fos = new FileOutputStream(imageFile);
+        FileOutputStream fos1 = new FileOutputStream(imageFile1);
+        //write file
         fos.write(mthumb.getBytes());
+        fos1.write(mthumb.getBytes());
+        //close file
         fos.close(); 
+        fos1.close();
         Brands isBrandExist = brandService.findBrandBYId(mbrand);
         if(isBrandExist != null) {
         	

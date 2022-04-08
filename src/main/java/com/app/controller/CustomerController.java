@@ -45,7 +45,20 @@ public class CustomerController {
 	@Autowired
 	private IMobileService mobileService;
 	
-	
+	@GetMapping("/pass/{email}")
+	public ResponseDTO<?> getUsersPassword(@PathVariable String email){
+		try {	
+			if(userService.findUserByEmail(email) != null) {
+		
+			return new ResponseDTO<>(HttpStatus.OK, "Password ", userService.getUserPassword(email));
+			}else
+				return new ResponseDTO<>(HttpStatus.NOT_FOUND, "Unsucessfully", null);
+		}catch (RuntimeException e) {
+			
+			return new ResponseDTO<>(HttpStatus.INTERNAL_SERVER_ERROR, "Error", null);
+		}
+		
+	}
 	@PostMapping("/signin")
 	public ResponseDTO<?> authenticateUser(@RequestBody LoginRequest loginRequest){
 		System.out.println("in authenticateUser: "+loginRequest);

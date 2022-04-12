@@ -20,6 +20,8 @@ import EmptyCart from './components/EmptyCart';
 import MobilesNotAvailable from './components/MobilesNotAvailable';
 import HomePageNavBar from './pages/HomePageNavBar';
 
+import Rating from "./pages/Rating";
+
 import Feedback from './pages/Feedback';
 
 
@@ -80,6 +82,7 @@ function App() {
             <Route path="/emptycart" component={EmptyCart}/>
             <Route path="/notavailiable" component={MobilesNotAvailable}/>
             <Route path="/feedback" component={Feedback} />
+            <Route path="/rating" component={Rating} />
           </Switch>
           
         </div>

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import './Navbar.css';
 import logoFinal5 from "../images/logoFinal5.png"
 
+
 import { useHistory } from 'react-router-dom'
 
 import Swal from "sweetalert2";
@@ -11,38 +12,44 @@ import Swal from "sweetalert2";
 // import 'react-toastify/dist/ReactToastify.css';
 // toast.configure()
 
+
+// var http = require('http');
+import { Cart } from "./Cart.js";
+
 import Feedback from "./Feedback";
 
 
 
 
 
-const Logout = () => {
+// const Logout = () => {
 
-    // get the history object
-    const history = useHistory()
 
-    Swal.fire({
-        title: 'Log-Out?',
-        text: "Are you Sure!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, logout'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-            )
-        }
-    })
 
-    history.push('/login');
+//     // get the history object
+//     const history = useHistory()
 
-}
+//     Swal.fire({
+//         title: 'Log-Out?',
+//         text: "Are you Sure!",
+//         icon: 'warning',
+//         showCancelButton: true,
+//         confirmButtonColor: '#3085d6',
+//         cancelButtonColor: '#d33',
+//         confirmButtonText: 'Yes, logout'
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             Swal.fire(
+//                 'Deleted!',
+//                 'Your file has been deleted.',
+//                 'success'
+//             )
+//         }
+//     })
+
+//     history.push('/login');
+
+// }
 
 const HomePageNavBar = () => {
 
@@ -63,15 +70,15 @@ const HomePageNavBar = () => {
             confirmButtonText: 'Yes, logout'
         }).then((result) => {
             if (result.isConfirmed) {
+                history.push('/rating');
                 Swal.fire(
                     'Logged out Successfully',
                     'success'
                 )
-                history.push('/');
             }
         })
 
-        
+
 
     }
 
@@ -99,7 +106,7 @@ const HomePageNavBar = () => {
                                 <i className="fa fa-comments">
                                 </i>
                                 <span style={{ marginLeft: "10px" }}>
-                                    <b>Reviews</b>
+                                    <b>Feedback</b>
                                 </span>
                             </Link>
 
@@ -141,7 +148,7 @@ const HomePageNavBar = () => {
                                 {/* <i className="fas fa-shopping-cart">
                                 </i> */}
                                 <span>
-                                    <i class="fa badge fa-lg" value="3">&#xf07a;</i>
+                                    <i class="fa badge fa-lg" value={4}>&#xf07a;</i>
                                 </span>
 
                                 {/* <i className="fa fa-circle fa-stack-2x fa-inverse"></i> */}

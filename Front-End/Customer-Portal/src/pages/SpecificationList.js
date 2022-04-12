@@ -54,7 +54,7 @@ const SpecificationList = () => {
     console.log(isSignin.status);
     if (isSignin.status === false) {
       toast.error('Plz Login first...!!',
-      { autoClose: 1000, position: toast.POSITION.BOTTOM_LEFT })
+        { autoClose: 1000, position: toast.POSITION.BOTTOM_LEFT })
       history.push("/login");
     } else {
       console.log(product);
@@ -78,13 +78,13 @@ const SpecificationList = () => {
         const result = response.data;
         if (result.status === "OK") {
           toast.success('Mobile Added to cart..!!  😀',
-          { autoClose: 1000, position: toast.POSITION.BOTTOM_LEFT })
+            { autoClose: 1000, position: toast.POSITION.BOTTOM_LEFT })
           //history.push('/login')
           dispatch(addToCartAction(product));
         } else {
           console.log(result.error);
           toast.error('Something went wrong ...🤔',
-          { autoClose: 1000, position: toast.POSITION.BOTTOM_LEFT })
+            { autoClose: 1000, position: toast.POSITION.BOTTOM_LEFT })
         }
       });
       //   } else {
@@ -110,7 +110,7 @@ const SpecificationList = () => {
       }
       else {
         toast.error('Something went wrong ...🤔',
-        { autoClose: 1000, position: toast.POSITION.BOTTOM_LEFT })
+          { autoClose: 1000, position: toast.POSITION.BOTTOM_LEFT })
       }
     })
   }
@@ -134,7 +134,7 @@ const SpecificationList = () => {
             <div className="style">
               <div className="row g-0">
                 <div className="col-md-4">
-{/* 
+                  {/* 
                   <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
                     <ol className="carousel-indicators">
                       <li data-target="#carouselExampleIndicators" data-slide-to={0} className="active" />
@@ -172,12 +172,33 @@ const SpecificationList = () => {
                     </a>
                   </div>
                    */}
+
+                  {/* <div class="flip-box">
+                    <div class="flip-box-inner">
+                      <div class="flip-box-front">
+                        <img
+                          src={'/images/' + spec.mobile.mobImage}
+                          className="mobimage mrgn"
+                          alt="..."
+                        />
+                      </div>
+                      <div class="flip-box-back">
+                        <img src="/images/iphone-13-2.jpg"></img>
+                      </div>
+                    </div>
+                  </div> */}
+
                   <img
                     src={'/images/' + spec.mobile.mobImage}
                     className="mobimage mrgn"
                     alt="..."
                   />
-                  <div className="row g-0">
+                  {/* <div className="row g-0"> */}
+
+                  <div className="row md-12">
+
+                    
+                    <br></br>
                     <h4 className="card-title text">{spec.mobile.mname}</h4>
                     <h3 className="card-title text">
                       Price: {spec.mobile.mprice} /-

@@ -1,8 +1,12 @@
 import axios from 'axios'
+import './Brands.css';
+
 import { useState, useEffect } from 'react'
 import { url } from '../common/constants'
 import HorizontalSliderBrand from '../components/HorizontalSliderBrand'
 import { useHistory } from 'react-router-dom'
+
+
 
 import Swal from "sweetalert2";
 // import { ToastContainer, toast } from 'react-toastify';
@@ -14,26 +18,26 @@ toast.configure()
 
 const Brands = () => {
   const [allBrands, setAllBrands] = useState([])
-  
+
   const history = useHistory()
 
   useEffect(() => {
     getAllBrands()
   }, [])
- 
-//   $('img').mouseenter(function() {
-//     $(this).css("cursor","pointer");
-//     $(this).animate({width: "50%", height: "50%"}, 'slow');
-// });
 
-// $('img').mouseleave(function() {   
-//     $(this).animate({width: "28%"}, 'slow');
-// });
+  //   $('img').mouseenter(function() {
+  //     $(this).css("cursor","pointer");
+  //     $(this).animate({width: "50%", height: "50%"}, 'slow');
+  // });
+
+  // $('img').mouseleave(function() {   
+  //     $(this).animate({width: "28%"}, 'slow');
+  // });
 
 
   const getAllBrands = () => {
     // rest API
-   // const url = 'http://localhost:4000'
+    // const url = 'http://localhost:4000'
 
     // send the GET request
     axios.get(url + '/brands/allBrands').then((response) => {
@@ -43,7 +47,7 @@ const Brands = () => {
         setAllBrands(res.result)
       } else {
         toast.error('Something went wrong ...🤔',
-        { autoClose: 1000, position: toast.POSITION.BOTTOM_LEFT })
+          { autoClose: 1000, position: toast.POSITION.BOTTOM_LEFT })
       }
     })
   }
@@ -55,32 +59,34 @@ const Brands = () => {
       const res = response.data
       console.log(res.result);
       console.log(brand.bname);
-     // console.log(brand.bthumb);
-     // console.log(url + '/brands/mobile/' + brand.bid)
+      // console.log(brand.bthumb);
+      // console.log(url + '/brands/mobile/' + brand.bid)
       if (res.status === 'OK') {
-        if(res.result == 0){         
+        if (res.result == 0) {
           history.push('/notavailiable')
-        }else{
-        history.push('/mobile-list', {
-          mobiles: res.result,
-          bname: brand.bname,
-        })
+        } else {
+          history.push('/mobile-list', {
+            mobiles: res.result,
+            bname: brand.bname,
+          })
         }
       } else {
         toast.error('Something went wrong ...🤔',
-        { autoClose: 1000, position: toast.POSITION.BOTTOM_LEFT })
+          { autoClose: 1000, position: toast.POSITION.BOTTOM_LEFT })
       }
     })
-    }
+  }
 
   return (
     <div id='image'>
       <h2 className="page-title">Brands</h2>
-      <HorizontalSliderBrand
-        onItemSelect={getAllMobilesOfSelectedBrand}
-        items={allBrands}
+      <div className='thumb'>
+        <HorizontalSliderBrand
+          onItemSelect={getAllMobilesOfSelectedBrand}
+          items={allBrands}
         // title="Brands"
-      />
+        />
+      </div>
     </div>
   )
 }

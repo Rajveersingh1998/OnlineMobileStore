@@ -26,7 +26,7 @@ const Orderconfirm = () => {
   };
  const onMail = () => {
 
-    let msg = 'Order Placed Sucessfully injoyyyyyyyyyyy..';
+    let msg = 'Your Order has been Placed Sucessfully ..🥳..';
 
     let tosend = {
             from_name: 'MobiGO',

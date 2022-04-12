@@ -98,7 +98,7 @@ const Login = () => {
 
   return (
     <div className='sigin'>
-      <div className="form-control">
+      <div >
         <h1 className="page-title">Sign in</h1>
         <div className="mb-3">
           <label><b>Email</b></label>

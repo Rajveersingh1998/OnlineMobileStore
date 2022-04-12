@@ -110,7 +110,7 @@ const Signup = () => {
       
 
       <div class="modal-lg sign-up">
-        <div className="form-control">
+        <div >
           <h1 className="page-title">Sign up</h1>
           <div className="mb-3">
             <label><b>First Name</b></label>

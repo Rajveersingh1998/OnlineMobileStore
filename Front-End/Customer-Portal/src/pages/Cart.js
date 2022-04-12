@@ -24,7 +24,7 @@ const Cart = () => {
     getcartItems()
   }, [])
  
-var cartitems = 0;
+var cartitems = 1;
 
 const getcartItems = () => {
   console.log(isSignin.user.id)
@@ -32,6 +32,8 @@ const getcartItems = () => {
     const res = response.data
     console.log(res.result);
     if (res.status === 'OK') {
+      cartitems = cartitems + 1;
+        console.log("cart items are " +cartitems);
       // setCartData(res.result)
       // console.log(res.result);
       if(res.result == 0){
@@ -40,6 +42,8 @@ const getcartItems = () => {
       }else{
         console.log("in else")
         setCartData(res.result)
+        cartitems = cartitems + 1;
+        console.log("cart items are " +cartitems);
       }
     } else {
       alert('please login first!')

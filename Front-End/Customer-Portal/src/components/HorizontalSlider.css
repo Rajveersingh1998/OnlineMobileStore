@@ -5,10 +5,9 @@
     font-weight: 1200;
   }
   
-  .homeimg {
-    width: 250px;
-    height: 200px;
-    border-radius: 5px;
+  .homeimg{
+    
+    width: 200px;
     box-shadow: 10px 10px 5px rgb(106, 140, 146);
 
   }
@@ -24,6 +23,7 @@
   .item-container {
     float: left;
     margin: 30px;
+    
   }
   
   .slider-container {

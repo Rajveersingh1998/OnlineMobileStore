@@ -6,6 +6,7 @@ import logoFinal5 from "../homeimgs/logoFinal5.png"
 
 import { useHistory } from 'react-router-dom'
 
+
 import Swal from "sweetalert2";
 
 
@@ -17,26 +18,26 @@ const HomePageNavBar = () => {
   const logout = () => {
 
 
-      Swal.fire({
-          title: 'Log-Out?',
-          text: "Are you Sure!",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, logout'
-      }).then((result) => {
-          if (result.isConfirmed) {
-              history.push('/rating');
-              Swal.fire(
-                  'Logged out Successfully',
-                  'success'
-              )
-          }
-      })
+    Swal.fire({
+      title: 'Log-Out?',
+      text: "Are you Sure!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, logout'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        history.push('/rating');
+        Swal.fire(
+          'Logged out Successfully',
+          'success'
+        )
+      }
+    })
 
 
-    }
+  }
 
 
 
@@ -73,6 +74,13 @@ const HomePageNavBar = () => {
                 </span>
               </Link>
 
+              &emsp;&emsp;&emsp;&emsp;
+
+              <div className="navbar-nav ml-auto">
+                <input class="form-control me-2" id="myInput" type="search" placeholder="Search" aria-label="Search" />
+                
+              </div>
+
 
               {/* <li className="navbar-nav ml-auto"><input
               style={{marginTop:"20px"}}
@@ -86,7 +94,7 @@ const HomePageNavBar = () => {
 
 
 
-              &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+              
               <li class="nav-item1" > <a class="nav-link" href="/signin">
                 <i className="fa fa-sign-in">
                 </i>

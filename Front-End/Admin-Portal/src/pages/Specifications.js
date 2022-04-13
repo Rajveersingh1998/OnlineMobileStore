@@ -23,8 +23,11 @@ const Specifications = () => {
     history.push('/signin')
   }
 
-  $(document).ready(function(){
-    $("#myInput").on("keyup", function() {
+  
+  $(document).ready(function()
+  {
+    $("#myInput").on("keyup", function() 
+    {
       var value = $(this).val().toLowerCase();
       $("#myTable tr").filter(function() {
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
@@ -79,7 +82,7 @@ const Specifications = () => {
             <th>Dimensions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id='myTable'>
 
           {
             specifications.length >= 1 ? specifications.map(specs => {

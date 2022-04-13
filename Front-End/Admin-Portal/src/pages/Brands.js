@@ -72,7 +72,7 @@ const Brands = () => {
             <th>Options</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id='myTable'>
 
           {
             brands.length >= 1 ? brands.map(brand => {

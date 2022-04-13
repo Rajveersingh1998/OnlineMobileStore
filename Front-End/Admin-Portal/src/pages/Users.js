@@ -32,8 +32,10 @@ const Users = () => {
   }
 
   //dont know why added...
-  $(document).ready(function(){
-    $("#myInput").on("keyup", function() {
+  $(document).ready(function()
+  {
+    $("#myInput").on("keyup", function() 
+    {
       var value = $(this).val().toLowerCase();
       $("#myTable tr").filter(function() {
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
@@ -126,7 +128,7 @@ const Users = () => {
               <th>Options</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id='myTable'>
             {/* {users.map((user)=>{
             return <UserRow user={user}/>
           })}       */}

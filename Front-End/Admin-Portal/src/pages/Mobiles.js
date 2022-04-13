@@ -24,10 +24,13 @@ const Mobiles = () => {
 
 
 
-  $(document).ready(function(){
-    $("#myInput").on("keyup", function() {
+  $(document).ready(function()
+  {
+    $("#myInput").on("keyup", function() 
+    {
       var value = $(this).val().toLowerCase();
-      $("#myTable tr").filter(function() {
+      $("#myTable tr").filter(function() 
+      {
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
       });
     });
@@ -113,7 +116,7 @@ const Mobiles = () => {
               <th>Options</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id='myTable'>
 
             {
               mobiles.length >= 1 ? mobiles.map(mobile => {
